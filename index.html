@@ -1,23 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday My Love ❤️ | Special Surprise For Bou</title>
+<title>Happy Birthday My Love ❤️</title>
 
-<!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<!-- Canvas Confetti Library -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
-/* Universal Reset & Font Defaults */
 * {
     margin: 0;
     padding: 0;
@@ -27,60 +24,48 @@
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    min-height: 100vh;
     overflow: hidden;
     font-family: 'Poppins', sans-serif;
     background: radial-gradient(circle at center, #2e081d 0%, #17030e 60%, #0a0106 100%);
-    color: #ffffff;
+    color: white;
 }
 
 .font-romantic {
     font-family: 'Great Vibes', cursive;
 }
 
-/* Ambient Glowing Background Orbs */
 .glow-orb {
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
-    opacity: 0.45;
+    opacity: .45;
     pointer-events: none;
     animation: floatGlow 10s ease-in-out infinite alternate;
 }
 
 @keyframes floatGlow {
-    0% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(30px, -40px) scale(1.15); }
-    100% { transform: translate(-20px, 30px) scale(0.9); }
+    0% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(30px,-40px) scale(1.15); }
+    100% { transform: translate(-20px,30px) scale(.9); }
 }
 
-/* Background Particle Canvas */
-#bgCanvas {
+#bgCanvas, #particleCanvas {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
     pointer-events: none;
 }
 
-#particleCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 25;
-    pointer-events: none;
-}
+#bgCanvas { z-index: 1; }
+#particleCanvas { z-index: 25; }
 
-/* Scene Container */
 .scene {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: 10;
     display: flex;
     flex-direction: column;
@@ -89,24 +74,45 @@ body {
     padding: 1.5rem 1rem;
 }
 
-/* Glassmorphic UI Containers */
 .glass-panel {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255,255,255,.08);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255,255,255,.18);
+    box-shadow: 0 15px 35px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.2);
 }
 
-/* Heading styling */
 .main-title {
-    background: linear-gradient(135deg, #fff 0%, #ff80ab 50%, #ff1744 100%);
+    background: linear-gradient(135deg,#fff 0%,#ff80ab 50%,#ff1744 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 30px rgba(255, 23, 68, 0.4);
 }
 
-/* BOW & ARROW SVG STYLING */
+/* NAME INPUT */
+.name-input {
+    width: min(340px, 85vw);
+    padding: 13px 20px;
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 30px;
+    background: rgba(255,255,255,.12);
+    color: white;
+    outline: none;
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.name-input::placeholder {
+    color: #ffd1e2;
+}
+
+.name-input:focus {
+    border-color: #ff80ab;
+    box-shadow: 0 0 15px #ff4081;
+}
+
+/* BOW */
 .bow-container {
     position: absolute;
     left: 2rem;
@@ -115,7 +121,7 @@ body {
     width: 120px;
     height: 200px;
     z-index: 15;
-    filter: drop-shadow(0 0 12px rgba(255, 64, 129, 0.6));
+    filter: drop-shadow(0 0 12px rgba(255,64,129,.6));
 }
 
 .bow-wood {
@@ -127,12 +133,13 @@ body {
 
 .bow-string {
     fill: none;
-    stroke: #ffffff;
+    stroke: white;
     stroke-width: 2.5;
     stroke-linecap: round;
-    filter: drop-shadow(0 0 5px #fff);
+    filter: drop-shadow(0 0 5px white);
 }
 
+/* ARROW */
 .arrow-svg {
     position: absolute;
     width: 120px;
@@ -146,55 +153,53 @@ body {
     filter: drop-shadow(0 0 10px #ff2a75);
 }
 
-/* HEART TARGET */
+/* HEART */
 .heart-target {
     position: absolute;
     right: 12%;
     top: 50%;
     transform: translateY(-50%) scale(0);
     z-index: 14;
-    cursor: pointer;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .heart-shape {
-    font-size: clamp(90px, 16vw, 150px);
+    font-size: clamp(90px,16vw,150px);
     line-height: 1;
-    filter: drop-shadow(0 0 25px rgba(255, 23, 68, 0.8)) drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 0 25px rgba(255,23,68,.8));
     animation: heartPulse 2s infinite alternate ease-in-out;
 }
 
 @keyframes heartPulse {
-    0% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(255, 23, 68, 0.7)); }
-    100% { transform: scale(1.08); filter: drop-shadow(0 0 35px rgba(255, 64, 129, 1)); }
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
 }
 
 .heart-target.show {
-    animation: heartPopIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation: heartPopIn .8s forwards;
 }
 
 @keyframes heartPopIn {
     0% { transform: translateY(-50%) scale(0) rotate(-20deg); opacity: 0; }
-    100% { transform: translateY(-50%) scale(1) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-50%) scale(1) rotate(0); opacity: 1; }
 }
 
 .heart-target.hit {
-    animation: heartHitShake 0.6s forwards;
+    animation: heartHitShake .6s forwards;
 }
 
 @keyframes heartHitShake {
     0% { transform: translateY(-50%) scale(1); }
     25% { transform: translateY(-50%) scale(1.4) rotate(15deg); }
-    50% { transform: translateY(-50%) scale(0.8) rotate(-15deg); }
+    50% { transform: translateY(-50%) scale(.8) rotate(-15deg); }
     100% { transform: translateY(-50%) scale(0); opacity: 0; }
 }
 
-/* CAKE & SURPRISE AREA */
+/* SURPRISE AREA */
 .surprise-area {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%) scale(0);
+    transform: translate(-50%,-50%) scale(0);
     opacity: 0;
     width: 92%;
     max-width: 650px;
@@ -203,16 +208,16 @@ body {
     flex-direction: column;
     align-items: center;
     pointer-events: none;
-    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all .8s cubic-bezier(.34,1.56,.64,1);
 }
 
 .surprise-area.show {
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%,-50%) scale(1);
     opacity: 1;
     pointer-events: auto;
 }
 
-/* 3D Interactive Cake */
+/* CAKE */
 .cake-wrapper {
     position: relative;
     width: 240px;
@@ -227,21 +232,21 @@ body {
 
 .cake-layer {
     border-radius: 12px;
-    box-shadow: inset 0 -8px 0 rgba(0, 0, 0, 0.15), 0 8px 15px rgba(0,0,0,0.3);
+    box-shadow: inset 0 -8px 0 rgba(0,0,0,.15), 0 8px 15px rgba(0,0,0,.3);
     position: relative;
 }
 
 .cake-top {
     width: 140px;
     height: 45px;
-    background: linear-gradient(180deg, #ff80ab, #f50057);
+    background: linear-gradient(180deg,#ff80ab,#f50057);
     z-index: 3;
 }
 
 .cake-middle {
     width: 180px;
     height: 50px;
-    background: linear-gradient(180deg, #ff4081, #c51162);
+    background: linear-gradient(180deg,#ff4081,#c51162);
     margin-top: -10px;
     z-index: 2;
 }
@@ -249,7 +254,7 @@ body {
 .cake-bottom {
     width: 220px;
     height: 55px;
-    background: linear-gradient(180deg, #d81b60, #880e4f);
+    background: linear-gradient(180deg,#d81b60,#880e4f);
     margin-top: -10px;
     z-index: 1;
 }
@@ -260,12 +265,10 @@ body {
     left: 0;
     right: 0;
     height: 12px;
-    background: #ffffff;
-    border-radius: 10px 10px 8px 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    background: white;
+    border-radius: 10px;
 }
 
-/* Candles & Flame */
 .candles-container {
     position: absolute;
     top: -28px;
@@ -277,7 +280,7 @@ body {
 .candle {
     width: 10px;
     height: 30px;
-    background: repeating-linear-gradient(45deg, #fff, #fff 5px, #ffeb3b 5px, #ffeb3b 10px);
+    background: repeating-linear-gradient(45deg,#fff,#fff 5px,#ffeb3b 5px,#ffeb3b 10px);
     border-radius: 4px;
     position: relative;
 }
@@ -289,20 +292,18 @@ body {
     transform: translateX(-50%);
     width: 12px;
     height: 18px;
-    background: radial-gradient(ellipse at bottom, #fff 0%, #ffeb3b 40%, #ff5722 80%, transparent 100%);
-    border-radius: 50% 50% 35% 35%;
+    background: radial-gradient(ellipse at bottom,#fff 0%,#ffeb3b 40%,#ff5722 80%,transparent 100%);
+    border-radius: 50%;
     filter: drop-shadow(0 0 8px #ff9800);
-    animation: flicker 0.6s infinite alternate;
+    animation: flicker .6s infinite alternate;
 }
 
 @keyframes flicker {
-    0% { transform: translateX(-50%) scale(1) rotate(-2deg); opacity: 0.95; }
-    100% { transform: translateX(-50%) scale(1.15) rotate(3deg); filter: drop-shadow(0 0 12px #ff5722); opacity: 1; }
+    from { transform: translateX(-50%) scale(1); }
+    to { transform: translateX(-50%) scale(1.15) rotate(3deg); }
 }
 
-.flame.extinguished {
-    display: none;
-}
+.flame.extinguished { display: none; }
 
 .smoke {
     position: absolute;
@@ -310,22 +311,20 @@ body {
     left: 50%;
     width: 8px;
     height: 8px;
-    background: rgba(200, 200, 200, 0.7);
+    background: rgba(200,200,200,.7);
     border-radius: 50%;
-    animation: smokeRise 1.2s forwards ease-out;
-    pointer-events: none;
+    animation: smokeRise 1.2s forwards;
 }
 
 @keyframes smokeRise {
-    0% { transform: translate(-50%, 0) scale(1); opacity: 0.8; }
-    100% { transform: translate(-50%, -40px) scale(3); opacity: 0; }
+    to { transform: translate(-50%,-40px) scale(3); opacity: 0; }
 }
 
-/* Love Letter Envelope Modal */
+/* LOVE LETTER */
 .envelope-modal {
     position: fixed;
     inset: 0;
-    background: rgba(10, 1, 6, 0.85);
+    background: rgba(10,1,6,.85);
     backdrop-filter: blur(12px);
     z-index: 50;
     display: flex;
@@ -333,7 +332,7 @@ body {
     justify-content: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.5s ease;
+    transition: opacity .5s;
 }
 
 .envelope-modal.open {
@@ -342,233 +341,235 @@ body {
 }
 
 .card-container {
-    background: linear-gradient(135deg, #fff5f8 0%, #ffe3ec 100%);
+    background: linear-gradient(135deg,#fff5f8,#ffe3ec);
     color: #2b0818;
     border-radius: 24px;
     max-width: 520px;
     width: 90%;
-    padding: 2.5rem 2rem;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 40px rgba(255, 64, 129, 0.3);
+    padding: 2rem;
+    box-shadow: 0 25px 50px rgba(0,0,0,.5);
     position: relative;
-    transform: scale(0.8) translateY(30px);
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: scale(.8) translateY(30px);
+    transition: transform .5s;
 }
 
 .envelope-modal.open .card-container {
     transform: scale(1) translateY(0);
 }
 
-/* Floating Polaroid Memory Cards */
 .polaroid {
-    background: #ffffff;
-    padding: 10px 10px 25px 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    background: white;
+    padding: 10px 10px 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.3);
     border-radius: 6px;
     transform: rotate(var(--rotation));
-    transition: all 0.3s ease;
+    transition: .3s;
 }
 
 .polaroid:hover {
-    transform: scale(1.08) rotate(0deg);
-    z-index: 40;
+    transform: scale(1.08) rotate(0);
 }
 
-/* Responsive Tweaks */
-@media (max-width: 640px) {
-    .bow-container { left: 0.5rem; width: 90px; height: 160px; }
+@media(max-width:640px) {
+    .bow-container { left: .5rem; width: 90px; height: 160px; }
     .heart-target { right: 5%; }
     .heart-shape { font-size: 90px; }
-    .cake-wrapper { transform: scale(0.85); }
+    .cake-wrapper { transform: scale(.85); }
+    .scene { padding: 1rem .5rem; }
 }
 </style>
 </head>
+
 <body>
 
-<!-- Ambient Backlight Glowing Orbs -->
-<div class="glow-orb" style="width: 320px; height: 320px; background: #ff1744; top: 15%; left: 10%;"></div>
-<div class="glow-orb" style="width: 380px; height: 380px; background: #d81b60; bottom: 10%; right: 10%;"></div>
-<div class="glow-orb" style="width: 250px; height: 250px; background: #9c27b0; top: 40%; left: 50%;"></div>
+<div class="glow-orb" style="width:320px;height:320px;background:#ff1744;top:15%;left:10%;"></div>
+<div class="glow-orb" style="width:380px;height:380px;background:#d81b60;bottom:10%;right:10%;"></div>
+<div class="glow-orb" style="width:250px;height:250px;background:#9c27b0;top:40%;left:50%;"></div>
 
-<!-- Interactive Backing Canvas for Floating Soft Hearts -->
 <canvas id="bgCanvas"></canvas>
-<!-- Canvas for Explosive Arrow Hit & Sparkles -->
 <canvas id="particleCanvas"></canvas>
 
 <div class="scene" id="scene">
 
-    <!-- Top Header -->
+    <!-- HEADER -->
     <header class="text-center mt-2 z-20">
-        <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase bg-pink-500/20 text-pink-300 border border-pink-500/30 mb-2 shadow-lg">
+        <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase bg-pink-500/20 text-pink-300 border border-pink-500/30 mb-2">
             ✨ Special Celebration ✨
         </span>
+
         <h1 class="main-title text-3xl md:text-5xl font-extrabold tracking-tight">
-            Happy Birthday, My Queen ❤️
+            Happy Birthday, <span class="recipient-name">My Queen</span> ❤️
         </h1>
-        <p class="text-pink-200/80 text-xs md:text-sm mt-1 font-light">
-            A romantic surprise made just for my beloved <span class="font-bold text-pink-400">Bou (বউ)</span>
+
+        <p class="text-pink-200/80 text-xs md:text-sm mt-1">
+            A romantic surprise made just for my beloved
+            <span class="font-bold text-pink-400 recipient-name">My Love</span>
         </p>
     </header>
 
-    <!-- CUPID'S BOW (SVG) -->
+    <!-- BOW -->
     <div class="bow-container" id="bowContainer">
         <svg viewBox="0 0 120 200" class="w-full h-full">
             <defs>
                 <linearGradient id="bowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#ff80ab" />
-                    <stop offset="50%" stop-color="#ff1744" />
-                    <stop offset="100%" stop-color="#880e4f" />
+                    <stop offset="0%" stop-color="#ff80ab"/>
+                    <stop offset="50%" stop-color="#ff1744"/>
+                    <stop offset="100%" stop-color="#880e4f"/>
                 </linearGradient>
             </defs>
 
-            <!-- Bow Wood -->
-            <path class="bow-wood" d="M40 10 Q120 100 40 190" />
-
-            <!-- Bow String (Dynamic Control Point) -->
-            <path class="bow-string" id="bowString" d="M40 10 L40 100 L40 190" />
+            <path class="bow-wood" d="M40 10 Q120 100 40 190"/>
+            <path class="bow-string" id="bowString" d="M40 10 L40 100 L40 190"/>
         </svg>
     </div>
 
-    <!-- CUPID'S GLOWING ARROW -->
+    <!-- ONE ARROW -->
     <svg class="arrow-svg" id="arrowSvg" viewBox="0 0 120 24">
-        <!-- Shaft -->
-        <line x1="5" y1="12" x2="110" y2="12" stroke="#ff80ab" stroke-width="4" stroke-linecap="round" />
-        <line x1="5" y1="12" x2="110" y2="12" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" />
-
-        <!-- Glowing Arrowhead -->
-        <path d="M118 12 L98 3 L103 12 L98 21 Z" fill="#ff1744" stroke="#ffffff" stroke-width="1" />
-
-        <!-- Romantic Feathers -->
-        <path d="M8 12 L20 3 L15 12 L20 21 Z" fill="#ff4081" />
-        <path d="M18 12 L28 4 L24 12 L28 20 Z" fill="#ff80ab" />
+        <line x1="5" y1="12" x2="110" y2="12" stroke="#ff80ab" stroke-width="4" stroke-linecap="round"/>
+        <line x1="5" y1="12" x2="110" y2="12" stroke="white" stroke-width="1.5"/>
+        <path d="M118 12 L98 3 L103 12 L98 21 Z" fill="#ff1744" stroke="white" stroke-width="1"/>
+        <path d="M8 12 L20 3 L15 12 L20 21 Z" fill="#ff4081"/>
+        <path d="M18 12 L28 4 L24 12 L28 20 Z" fill="#ff80ab"/>
     </svg>
 
-    <!-- TARGET HEART -->
-    <div class="heart-target" id="heartTarget" title="Click to aim manually or hit Start!">
+    <!-- HEART -->
+    <div class="heart-target" id="heartTarget">
         <div class="heart-shape">💖</div>
     </div>
 
-    <!-- MAIN BIRTHDAY CAKE & SURPRISE CONTENT AREA -->
+    <!-- BIRTHDAY SURPRISE -->
     <div class="surprise-area" id="surpriseArea">
-        <div class="glass-panel w-full rounded-3xl p-6 md:p-8 text-center flex flex-direction flex-col items-center relative overflow-hidden">
-            
-            <!-- Floating Decorative Heart Icons -->
-            <div class="absolute -top-6 -left-6 text-4xl opacity-30 animate-bounce">💖</div>
-            <div class="absolute -bottom-6 -right-6 text-4xl opacity-30 animate-bounce" style="animation-delay: 1s;">✨</div>
+        <div class="glass-panel w-full rounded-3xl p-6 md:p-8 text-center flex flex-col items-center relative overflow-hidden">
 
-            <!-- Interactive 3D Cake -->
-            <div class="cake-wrapper" id="cakeWrapper" title="Click on candles to blow them out!">
+            <div class="absolute -top-6 -left-6 text-4xl opacity-30">💖</div>
+            <div class="absolute -bottom-6 -right-6 text-4xl opacity-30">✨</div>
+
+            <div class="cake-wrapper" id="cakeWrapper" title="Click to blow out candles!">
+
                 <div class="candles-container">
-                    <div class="candle">
-                        <div class="flame" id="flame1"></div>
-                    </div>
-                    <div class="candle" style="margin-top: -6px;">
-                        <div class="flame" id="flame2"></div>
-                    </div>
-                    <div class="candle">
-                        <div class="flame" id="flame3"></div>
-                    </div>
+                    <div class="candle"><div class="flame" id="flame1"></div></div>
+                    <div class="candle" style="margin-top:-6px;"><div class="flame" id="flame2"></div></div>
+                    <div class="candle"><div class="flame" id="flame3"></div></div>
                 </div>
 
-                <!-- Cake Layers -->
-                <div class="cake-layer cake-top">
-                    <div class="cake-frosting"></div>
-                </div>
-                <div class="cake-layer cake-middle">
-                    <div class="cake-frosting"></div>
-                </div>
-                <div class="cake-layer cake-bottom">
-                    <div class="cake-frosting"></div>
-                </div>
+                <div class="cake-layer cake-top"><div class="cake-frosting"></div></div>
+                <div class="cake-layer cake-middle"><div class="cake-frosting"></div></div>
+                <div class="cake-layer cake-bottom"><div class="cake-frosting"></div></div>
             </div>
 
-            <!-- Birthday Greeting Message -->
             <h2 class="font-romantic text-4xl md:text-6xl text-pink-300 mb-2">
-                Happy Birthday, Shona! 🎉
+                Happy Birthday, <span class="recipient-name">Shona</span>! 🎉
             </h2>
 
-            <p class="text-pink-100 text-sm md:text-base font-normal max-w-md mx-auto leading-relaxed mb-6">
-                শুভ জন্মদিন আমার প্রিয় বউ! ❤️ You bring warmth, magic, and boundless love into my life every single day.
+            <p class="text-pink-100 text-sm md:text-base max-w-md mx-auto leading-relaxed mb-6">
+                শুভ জন্মদিন আমার প্রিয় <span class="recipient-name">ভালোবাসা</span>! ❤️
+                You bring warmth, magic, and boundless love into my life every single day.
             </p>
 
-            <!-- Action Buttons Row -->
             <div class="flex flex-wrap items-center justify-center gap-3 z-20">
-                <button id="blowCandlesBtn" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-pink-500 hover:from-amber-600 hover:to-pink-600 text-white font-medium text-xs md:text-sm shadow-lg shadow-pink-500/30 transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2">
-                    <span>🕯️</span> Blow Candles
+                <button id="blowCandlesBtn" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-pink-500 text-white font-medium text-sm shadow-lg">
+                    🕯️ Blow Candles
                 </button>
 
-                <button id="readLetterBtn" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white font-medium text-xs md:text-sm shadow-lg shadow-rose-500/30 transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2">
-                    <span>💌</span> Open Love Letter
+                <button id="readLetterBtn" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-pink-600 to-rose-600 text-white font-medium text-sm shadow-lg">
+                    💌 Open Love Letter
                 </button>
 
-                <button id="replayBtn" class="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-pink-200 border border-white/20 transition-all transform hover:scale-105 active:scale-95" title="Replay Animation">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                    </svg>
+                <button id="replayBtn" class="p-2.5 rounded-full bg-white/10 text-pink-200 border border-white/20" title="Replay">
+                    ↻
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Start Trigger Button Bar -->
-    <footer class="mb-4 z-30">
-        <button id="startBtn" class="group relative px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-rose-600 text-white font-bold text-lg md:text-xl shadow-2xl shadow-pink-500/50 hover:shadow-pink-500/80 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0.5 overflow-hidden">
-            <span class="relative z-10 flex items-center gap-3">
-                <span>Start Birthday Surprise 💘</span>
-            </span>
-            <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+    <!-- NAME INPUT AND START -->
+    <footer class="mb-4 z-30 flex flex-col items-center">
+
+        <input
+            type="text"
+            id="recipientName"
+            class="name-input"
+            placeholder="Enter Your Special Person's Name ❤️"
+            maxlength="40"
+            autocomplete="off"
+        >
+
+        <button id="startBtn" class="px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-rose-600 text-white font-bold text-lg shadow-2xl shadow-pink-500/50 hover:scale-105 transition">
+            Start Birthday Surprise 💘
         </button>
     </footer>
 
 </div>
 
-<!-- LOVE LETTER ENVELOPE MODAL -->
+<!-- LOVE LETTER MODAL -->
 <div class="envelope-modal" id="letterModal">
     <div class="card-container text-center relative">
-        <button id="closeLetterBtn" class="absolute top-4 right-4 text-pink-900/60 hover:text-pink-900 text-2xl font-bold w-8 h-8 rounded-full bg-pink-200/50 flex items-center justify-center transition-colors">
+
+        <button id="closeLetterBtn" class="absolute top-3 right-4 text-pink-900 text-2xl font-bold">
             ✕
         </button>
 
         <div class="text-4xl mb-2">💌</div>
-        <h3 class="font-romantic text-4xl text-pink-700 mb-1">To My Dearest Wife (বউ)</h3>
-        <p class="text-xs uppercase tracking-widest text-pink-500 font-semibold mb-4">My Heart & Soul</p>
 
-        <div class="text-left text-pink-950 text-sm md:text-base space-y-3 font-normal leading-relaxed my-4 max-h-[50vh] overflow-y-auto pr-2">
+        <h3 class="font-romantic text-4xl text-pink-700 mb-1">
+            To My Dearest <span class="recipient-name">Love</span> ❤️
+        </h3>
+
+        <p class="text-xs uppercase tracking-widest text-pink-500 font-semibold mb-4">
+            My Heart & Soul
+        </p>
+
+        <div class="text-left text-pink-950 text-sm md:text-base space-y-3 leading-relaxed my-4 max-h-[50vh] overflow-y-auto pr-2">
+
             <p>
-                <strong>আমার একমাত্র ভালোবাসা,</strong>
+                <strong>
+                    আমার একমাত্র ভালোবাসা <span class="recipient-name">প্রিয়জন</span>,
+                </strong>
             </p>
+
             <p>
-                আজকের এই বিশেষ দিনে তোমাকে জানাতে চাই, তুমি আমার জীবনের সবচেয়ে সুন্দর উপহার। তোমার হাসিতে আমার পুরো পৃথিবী আলোকিত হয়ে ওঠে!
+                আজকের এই বিশেষ দিনে তোমাকে জানাতে চাই,
+                তুমি আমার জীবনের সবচেয়ে সুন্দর উপহার।
+                তোমার হাসিতে আমার পুরো পৃথিবী আলোকিত হয়ে ওঠে!
             </p>
+
             <p>
-                Thank you for filling my days with warmth, care, and infinite sweetness. Walking through life with you by my side is my greatest blessing.
+                Thank you for filling my days with warmth,
+                care, and infinite sweetness.
+                Walking through life with you by my side
+                is my greatest blessing.
             </p>
+
             <p class="font-semibold text-pink-800 text-center text-lg pt-2">
-                "Happy Birthday Queen of My Heart! 👑❤️"
+                Happy Birthday <span class="recipient-name">My Queen</span>! 👑❤️
             </p>
         </div>
 
-        <!-- Mini Floating Memory Cards inside Modal -->
         <div class="flex justify-center gap-3 mt-4 pt-2 border-t border-pink-200">
-            <div class="polaroid" style="--rotation: -4deg;">
+            <div class="polaroid" style="--rotation:-4deg;">
                 <span class="text-xl">👩‍❤️‍👨</span>
-                <p class="text-[10px] font-semibold text-gray-700 mt-1">Together Always</p>
+                <p class="text-xs text-gray-700 mt-1">Together Always</p>
             </div>
-            <div class="polaroid" style="--rotation: 3deg;">
+
+            <div class="polaroid" style="--rotation:3deg;">
                 <span class="text-xl">💍</span>
-                <p class="text-[10px] font-semibold text-gray-700 mt-1">My Best Choice</p>
+                <p class="text-xs text-gray-700 mt-1">My Best Choice</p>
             </div>
-            <div class="polaroid" style="--rotation: -2deg;">
+
+            <div class="polaroid" style="--rotation:-2deg;">
                 <span class="text-xl">🌹</span>
-                <p class="text-[10px] font-semibold text-gray-700 mt-1">Forever Love</p>
+                <p class="text-xs text-gray-700 mt-1">Forever Love</p>
             </div>
         </div>
+
     </div>
 </div>
 
 <script>
-/* ==========================================================================
-   AUDIO SYNTHESIZER (Web Audio API - No External Sound Files Needed)
-   ========================================================================== */
+/* =========================================
+   AUDIO CONTROLLER
+========================================= */
+
 class AudioController {
     constructor() {
         this.ctx = null;
@@ -577,84 +578,68 @@ class AudioController {
     init() {
         if (!this.ctx) {
             const AudioContext = window.AudioContext || window.webkitAudioContext;
-            this.ctx = new AudioContext();
+            if (AudioContext) this.ctx = new AudioContext();
+        }
+
+        if (this.ctx && this.ctx.state === 'suspended') {
+            this.ctx.resume();
         }
     }
 
-    // Play Bow Tension Stretch Sound
+    tone(freq, duration, type = 'sine', volume = .1) {
+        this.init();
+        if (!this.ctx) return;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+
+        gain.gain.setValueAtTime(volume, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(.001, this.ctx.currentTime + duration);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start();
+        osc.stop(this.ctx.currentTime + duration);
+    }
+
     playStretchSound() {
-        this.init();
-        if (!this.ctx) return;
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(120, this.ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(320, this.ctx.currentTime + 0.6);
-        gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.6);
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        osc.start();
-        osc.stop(this.ctx.currentTime + 0.6);
+        this.tone(150, .6, 'sine', .08);
     }
 
-    // Play Arrow Launch / Whoosh Sound
     playShootSound() {
-        this.init();
-        if (!this.ctx) return;
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(450, this.ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(120, this.ctx.currentTime + 0.25);
-        gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.25);
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        osc.start();
-        osc.stop(this.ctx.currentTime + 0.25);
+        this.tone(450, .3, 'triangle', .15);
     }
 
-    // Play Target Hit Chime Sound
     playHitSound() {
-        this.init();
-        if (!this.ctx) return;
-        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-        notes.forEach((freq, idx) => {
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, this.ctx.currentTime + idx * 0.08);
-            gain.gain.setValueAtTime(0.12, this.ctx.currentTime + idx * 0.08);
-            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + idx * 0.08 + 0.5);
-            osc.connect(gain);
-            gain.connect(this.ctx.destination);
-            osc.start(this.ctx.currentTime + idx * 0.08);
-            osc.stop(this.ctx.currentTime + idx * 0.08 + 0.5);
+        [523,659,784,1046].forEach((freq,index) => {
+            setTimeout(() => this.tone(freq,.5,'sine',.12), index * 80);
         });
     }
 
-    // Play Candle Blow Out Smoke Sound
     playBlowSound() {
         this.init();
         if (!this.ctx) return;
-        const bufferSize = this.ctx.sampleRate * 0.4;
-        const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+
+        const length = this.ctx.sampleRate * .4;
+        const buffer = this.ctx.createBuffer(1,length,this.ctx.sampleRate);
         const data = buffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) {
-            data[i] = Math.random() * 2 - 1;
+
+        for (let i=0; i<length; i++) {
+            data[i] = Math.random()*2-1;
         }
+
         const noise = this.ctx.createBufferSource();
         noise.buffer = buffer;
-        const filter = this.ctx.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(800, this.ctx.currentTime);
-        filter.frequency.linearRampToValueAtTime(100, this.ctx.currentTime + 0.4);
+
         const gain = this.ctx.createGain();
-        gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.4);
-        noise.connect(filter);
-        filter.connect(gain);
+        gain.gain.setValueAtTime(.1,this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(.01,this.ctx.currentTime+.4);
+
+        noise.connect(gain);
         gain.connect(this.ctx.destination);
         noise.start();
     }
@@ -662,103 +647,169 @@ class AudioController {
 
 const audio = new AudioController();
 
-/* ==========================================================================
-   FLOATING BACKGROUND HEARTS (Canvas 1)
-   ========================================================================== */
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const scene = document.getElementById('scene');
+const bowContainer = document.getElementById('bowContainer');
+const bowString = document.getElementById('bowString');
+const arrowSvg = document.getElementById('arrowSvg');
+const heartTarget = document.getElementById('heartTarget');
+const surpriseArea = document.getElementById('surpriseArea');
+
+const startBtn = document.getElementById('startBtn');
+const recipientNameInput = document.getElementById('recipientName');
+
+const blowCandlesBtn = document.getElementById('blowCandlesBtn');
+const readLetterBtn = document.getElementById('readLetterBtn');
+const closeLetterBtn = document.getElementById('closeLetterBtn');
+const replayBtn = document.getElementById('replayBtn');
+
+const letterModal = document.getElementById('letterModal');
+const cakeWrapper = document.getElementById('cakeWrapper');
+
+let isRunning = false;
+let candlesLit = true;
+let recipientName = '';
+
+const wait = ms => new Promise(resolve => setTimeout(resolve,ms));
+
+/* =========================================
+   DYNAMIC RECIPIENT NAME
+========================================= */
+
+function applyRecipientName() {
+
+    const name = recipientNameInput.value.trim();
+
+    if (!name) {
+        alert("Please enter your special person's name ❤️");
+        recipientNameInput.focus();
+        return false;
+    }
+
+    recipientName = name;
+
+    document.querySelectorAll('.recipient-name').forEach(element => {
+        element.textContent = recipientName;
+    });
+
+    document.title = `Happy Birthday ${recipientName} ❤️ | Special Surprise`;
+
+    return true;
+}
+
+/* =========================================
+   BACKGROUND FLOATING HEARTS
+========================================= */
+
 const bgCanvas = document.getElementById('bgCanvas');
 const bgCtx = bgCanvas.getContext('2d');
+
 let bgHearts = [];
 
 function resizeBgCanvas() {
     bgCanvas.width = window.innerWidth;
     bgCanvas.height = window.innerHeight;
 }
-window.addEventListener('resize', resizeBgCanvas);
+
+window.addEventListener('resize',resizeBgCanvas);
 resizeBgCanvas();
 
 class FloatingHeart {
     constructor() {
         this.reset();
+        this.y = Math.random() * bgCanvas.height;
     }
 
     reset() {
         this.x = Math.random() * bgCanvas.width;
         this.y = bgCanvas.height + 20;
-        this.size = Math.random() * 14 + 8;
-        this.speed = Math.random() * 1.2 + 0.4;
-        this.opacity = Math.random() * 0.5 + 0.2;
-        this.swing = Math.random() * 2;
-        this.swingSpeed = Math.random() * 0.02 + 0.01;
+        this.size = Math.random()*14+8;
+        this.speed = Math.random()*1.2+.4;
+        this.opacity = Math.random()*.5+.2;
+        this.swing = Math.random()*2;
+        this.swingSpeed = Math.random()*.02+.01;
     }
 
     update() {
         this.y -= this.speed;
         this.swing += this.swingSpeed;
-        this.x += Math.sin(this.swing) * 0.5;
+        this.x += Math.sin(this.swing)*.5;
 
-        if (this.y < -30) {
-            this.reset();
-        }
+        if (this.y < -30) this.reset();
     }
 
     draw() {
         bgCtx.save();
         bgCtx.globalAlpha = this.opacity;
         bgCtx.font = `${this.size}px serif`;
-        bgCtx.fillText('❤️', this.x, this.y);
+        bgCtx.fillText('❤️',this.x,this.y);
         bgCtx.restore();
     }
 }
 
-for (let i = 0; i < 25; i++) {
+for(let i=0;i<25;i++) {
     bgHearts.push(new FloatingHeart());
 }
 
 function animateBg() {
-    bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+    bgCtx.clearRect(0,0,bgCanvas.width,bgCanvas.height);
+
     bgHearts.forEach(h => {
         h.update();
         h.draw();
     });
+
     requestAnimationFrame(animateBg);
 }
+
 animateBg();
 
-/* ==========================================================================
-   EXPLOSIVE SPARKLE & HEART CANVAS PARTICLES (Canvas 2)
-   ========================================================================== */
+/* =========================================
+   IMPACT PARTICLES
+========================================= */
+
 const particleCanvas = document.getElementById('particleCanvas');
 const pCtx = particleCanvas.getContext('2d');
+
 let particles = [];
 
 function resizeParticleCanvas() {
     particleCanvas.width = window.innerWidth;
     particleCanvas.height = window.innerHeight;
 }
-window.addEventListener('resize', resizeParticleCanvas);
+
+window.addEventListener('resize',resizeParticleCanvas);
 resizeParticleCanvas();
 
 class BurstParticle {
-    constructor(x, y) {
+    constructor(x,y) {
         this.x = x;
         this.y = y;
-        const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 12 + 3;
-        this.vx = Math.cos(angle) * speed;
-        this.vy = Math.sin(angle) * speed;
-        this.gravity = 0.15;
-        this.friction = 0.96;
+
+        const angle = Math.random()*Math.PI*2;
+        const speed = Math.random()*12+3;
+
+        this.vx = Math.cos(angle)*speed;
+        this.vy = Math.sin(angle)*speed;
+
+        this.gravity = .15;
+        this.friction = .96;
         this.alpha = 1;
-        this.decay = Math.random() * 0.02 + 0.015;
-        this.color = ['#ff1744', '#ff4081', '#ffeb3b', '#00e5ff', '#ffffff'][Math.floor(Math.random() * 5)];
-        this.isHeart = Math.random() > 0.5;
-        this.size = Math.random() * 12 + 6;
+        this.decay = Math.random()*.02+.015;
+
+        this.color = ['#ff1744','#ff4081','#ffeb3b','#00e5ff','#ffffff'][Math.floor(Math.random()*5)];
+        this.isHeart = Math.random()>.5;
+        this.size = Math.random()*12+6;
     }
 
     update() {
         this.vx *= this.friction;
         this.vy *= this.friction;
         this.vy += this.gravity;
+
         this.x += this.vx;
         this.y += this.vy;
         this.alpha -= this.decay;
@@ -766,245 +817,331 @@ class BurstParticle {
 
     draw() {
         pCtx.save();
-        pCtx.globalAlpha = Math.max(0, this.alpha);
-        if (this.isHeart) {
+        pCtx.globalAlpha = Math.max(0,this.alpha);
+
+        if(this.isHeart) {
             pCtx.font = `${this.size}px serif`;
-            pCtx.fillText('💖', this.x, this.y);
+            pCtx.fillText('💖',this.x,this.y);
         } else {
             pCtx.beginPath();
-            pCtx.arc(this.x, this.y, this.size / 2, 0, Math.PI * 2);
+            pCtx.arc(this.x,this.y,this.size/2,0,Math.PI*2);
             pCtx.fillStyle = this.color;
             pCtx.shadowBlur = 10;
             pCtx.shadowColor = this.color;
             pCtx.fill();
         }
+
         pCtx.restore();
     }
 }
 
-function spawnImpactBurst(x, y) {
-    for (let i = 0; i < 90; i++) {
-        particles.push(new BurstParticle(x, y));
+function spawnImpactBurst(x,y) {
+    for(let i=0;i<90;i++) {
+        particles.push(new BurstParticle(x,y));
     }
 }
 
 function animateParticles() {
-    pCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
-    for (let i = particles.length - 1; i >= 0; i--) {
+    pCtx.clearRect(0,0,particleCanvas.width,particleCanvas.height);
+
+    for(let i=particles.length-1;i>=0;i--) {
         const p = particles[i];
         p.update();
         p.draw();
-        if (p.alpha <= 0) {
-            particles.splice(i, 1);
-        }
+
+        if(p.alpha<=0) particles.splice(i,1);
     }
+
     requestAnimationFrame(animateParticles);
 }
+
 animateParticles();
 
-/* ==========================================================================
-   MAIN SURPRISE ANIMATION FLOW
-   ========================================================================== */
-const scene = document.getElementById('scene');
-const bowContainer = document.getElementById('bowContainer');
-const bowString = document.getElementById('bowString');
-const arrowSvg = document.getElementById('arrowSvg');
-const heartTarget = document.getElementById('heartTarget');
-const surpriseArea = document.getElementById('surpriseArea');
-const startBtn = document.getElementById('startBtn');
-const blowCandlesBtn = document.getElementById('blowCandlesBtn');
-const readLetterBtn = document.getElementById('readLetterBtn');
-const closeLetterBtn = document.getElementById('closeLetterBtn');
-const letterModal = document.getElementById('letterModal');
-const replayBtn = document.getElementById('replayBtn');
-const cakeWrapper = document.getElementById('cakeWrapper');
+/* =========================================
+   CONFETTI
+========================================= */
 
-let isRunning = false;
-let candlesLit = true;
-
-const wait = ms => new Promise(res => setTimeout(res, ms));
-
-function getElementCenter(el) {
-    const rect = el.getBoundingClientRect();
-    return {
-        x: rect.left + rect.width / 2,
-        y: rect.top + rect.height / 2,
-        rect: rect
-    };
-}
-
-async function startSurpriseSequence() {
-    if (isRunning) return;
-    isRunning = true;
-    candlesLit = true;
-
-    // Reset Flame states
-    document.querySelectorAll('.flame').forEach(f => f.classList.remove('extinguished'));
-
-    // Hide Start Button smoothly
-    startBtn.style.transform = 'scale(0)';
-    startBtn.style.opacity = '0';
-    await wait(300);
-    startBtn.style.display = 'none';
-
-    // Step 1: Pop in Heart Target
-    heartTarget.classList.remove('hit');
-    heartTarget.classList.add('show');
-    await wait(900);
-
-    // Step 2: Calculate Coordinates
-    const bowCenter = getElementCenter(bowContainer);
-    const targetCenter = getElementCenter(heartTarget);
-
-    // String origin point relative to window
-    const nockX = bowCenter.rect.left + bowCenter.rect.width * (40 / 120);
-    const nockY = bowCenter.rect.top + bowCenter.rect.height * (100 / 200);
-
-    const dx = targetCenter.x - nockX;
-    const dy = targetCenter.y - nockY;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-
-    const ux = dx / distance;
-    const uy = dy / distance;
-    const angleRad = Math.atan2(dy, dx);
-    const angleDeg = angleRad * (180 / Math.PI);
-
-    const pullBack = 40;
-    const pulledX = nockX - pullBack * ux;
-    const pulledY = nockY - pullBack * uy;
-
-    // Step 3: Draw Back Bow String & Position Arrow
-    audio.playStretchSound();
-    bowString.setAttribute("d", `M40 10 Q${40 - (pullBack * 1.8)} 100 40 190`);
-
-    arrowSvg.style.left = `${pulledX}px`;
-    arrowSvg.style.top = `${pulledY - 12}px`;
-    arrowSvg.style.transform = `rotate(${angleDeg}deg)`;
-    arrowSvg.style.opacity = "1";
-
-    await wait(700);
-
-    // Step 4: Release Bow String & Shoot Arrow
-    audio.playShootSound();
-    bowString.setAttribute("d", "M40 10 L40 100 L40 190");
-
-    const arrowLength = 110;
-    const finalX = targetCenter.x - arrowLength * ux;
-    const finalY = targetCenter.y - arrowLength * uy;
-
-    const arrowAnim = arrowSvg.animate([
-        { left: `${pulledX}px`, top: `${pulledY - 12}px` },
-        { left: `${finalX}px`, top: `${finalY - 12}px` }
-    ], {
-        duration: 450,
-        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-        fill: 'forwards'
-    });
-
-    await arrowAnim.finished;
-
-    // Step 5: Target Impact Effects
-    arrowSvg.style.opacity = "0";
-    audio.playHitSound();
-
-    // Spawn Sparkle Explosion Canvas Particles
-    spawnImpactBurst(targetCenter.x, targetCenter.y);
-
-    heartTarget.classList.add('hit');
-    await wait(500);
-
-    // Step 6: Reveal Birthday Cake & Surprise Card
-    surpriseArea.classList.add('show');
-    
-    // Launch Confetti Cannon Celebration
-    triggerConfettiCannon();
-}
-
-// Celebration Confetti Cannon
 function triggerConfettiCannon() {
-    if (typeof confetti === 'function') {
+    if(typeof confetti === 'function') {
         confetti({
-            particleCount: 80,
-            spread: 100,
-            origin: { y: 0.6 }
+            particleCount:80,
+            spread:100,
+            origin:{y:.6}
         });
 
         setTimeout(() => {
             confetti({
-                particleCount: 50,
-                angle: 60,
-                spread: 70,
-                origin: { x: 0 }
+                particleCount:50,
+                angle:60,
+                spread:70,
+                origin:{x:0}
             });
+
             confetti({
-                particleCount: 50,
-                angle: 120,
-                spread: 70,
-                origin: { x: 1 }
+                particleCount:50,
+                angle:120,
+                spread:70,
+                origin:{x:1}
             });
-        }, 300);
+        },300);
     }
 }
 
-// Extinguish Candles Action
+/* =========================================
+   POSITION HELPERS
+========================================= */
+
+function getElementCenter(el) {
+    const rect = el.getBoundingClientRect();
+
+    return {
+        x:rect.left+rect.width/2,
+        y:rect.top+rect.height/2,
+        rect:rect
+    };
+}
+
+/* =========================================
+   MAIN BIRTHDAY ANIMATION
+========================================= */
+
+async function startSurpriseSequence() {
+
+    if(isRunning) return;
+
+    isRunning = true;
+    candlesLit = true;
+
+    audio.init();
+
+    // Reset previous animation
+    document.querySelectorAll('.flame').forEach(f => {
+        f.classList.remove('extinguished');
+    });
+
+    heartTarget.classList.remove('hit');
+    heartTarget.classList.add('show');
+
+    arrowSvg.style.opacity = '0';
+
+    surpriseArea.classList.remove('show');
+
+    startBtn.style.transform = 'scale(0)';
+    startBtn.style.opacity = '0';
+
+    await wait(300);
+
+    startBtn.style.display = 'none';
+    recipientNameInput.style.display = 'none';
+
+    // Step 1: Show Heart
+    await wait(900);
+
+    // Step 2: Calculate positions
+    const bowRect = bowContainer.getBoundingClientRect();
+    const targetCenter = getElementCenter(heartTarget);
+
+    // Bow string center
+    const nockX = bowRect.left + bowRect.width*(40/120);
+    const nockY = bowRect.top + bowRect.height*(100/200);
+
+    const dx = targetCenter.x-nockX;
+    const dy = targetCenter.y-nockY;
+
+    const distance = Math.sqrt(dx*dx+dy*dy);
+
+    const ux = dx/distance;
+    const uy = dy/distance;
+
+    const angleDeg = Math.atan2(dy,dx)*(180/Math.PI);
+
+    const pullBack = 40;
+
+    const pulledX = nockX-pullBack*ux;
+    const pulledY = nockY-pullBack*uy;
+
+    // Step 3: Pull Bow String
+    audio.playStretchSound();
+
+    bowString.setAttribute(
+        'd',
+        `M40 10 Q${40-2*pullBack*ux} ${100-2*pullBack*uy} 40 190`
+    );
+
+    arrowSvg.style.left = `${pulledX}px`;
+    arrowSvg.style.top = `${pulledY-12}px`;
+    arrowSvg.style.transform = `rotate(${angleDeg}deg)`;
+    arrowSvg.style.opacity = '1';
+
+    await wait(700);
+
+    // Step 4: Release Bow String
+    audio.playShootSound();
+
+    bowString.setAttribute(
+        'd',
+        'M40 10 L40 100 L40 190'
+    );
+
+    const arrowLength = 118;
+
+    const finalX = targetCenter.x-arrowLength*ux;
+    const finalY = targetCenter.y-arrowLength*uy;
+
+    // Step 5: Arrow flies to heart center
+    const arrowAnim = arrowSvg.animate([
+        {
+            left:`${pulledX}px`,
+            top:`${pulledY-12}px`
+        },
+        {
+            left:`${finalX}px`,
+            top:`${finalY-12}px`
+        }
+    ],{
+        duration:650,
+        easing:'cubic-bezier(.25,.46,.45,.94)',
+        fill:'forwards'
+    });
+
+    await arrowAnim.finished;
+
+    // Step 6: Hit heart
+    arrowSvg.style.opacity = '0';
+
+    audio.playHitSound();
+
+    spawnImpactBurst(targetCenter.x,targetCenter.y);
+
+    heartTarget.classList.add('hit');
+
+    await wait(600);
+
+    // Step 7: Show Birthday Cake
+    surpriseArea.classList.add('show');
+
+    triggerConfettiCannon();
+}
+
+/* =========================================
+   BLOW CANDLES
+========================================= */
+
 function blowCandles() {
-    if (!candlesLit) return;
+
+    if(!candlesLit) return;
+
     candlesLit = false;
+
     audio.playBlowSound();
 
     const flames = document.querySelectorAll('.flame');
-    flames.forEach((flame, index) => {
+
+    flames.forEach((flame,index) => {
+
         setTimeout(() => {
+
             flame.classList.add('extinguished');
-            
-            // Create smoke element
-            const candleEl = flame.parentElement;
+
+            const candle = flame.parentElement;
             const smoke = document.createElement('div');
+
             smoke.className = 'smoke';
-            candleEl.appendChild(smoke);
-            setTimeout(() => smoke.remove(), 1200);
-        }, index * 150);
+
+            candle.appendChild(smoke);
+
+            setTimeout(() => smoke.remove(),1200);
+
+        },index*150);
+
     });
 
-    // Fire celebratory confetti after blowing candles
-    setTimeout(() => {
-        triggerConfettiCannon();
-    }, 500);
+    setTimeout(triggerConfettiCannon,500);
 }
 
-/* ==========================================================================
-   EVENT LISTENERS
-   ========================================================================== */
-startBtn.addEventListener('click', startSurpriseSequence);
-heartTarget.addEventListener('click', startSurpriseSequence);
+/* =========================================
+   LOVE LETTER
+========================================= */
 
-cakeWrapper.addEventListener('click', blowCandles);
-blowCandlesBtn.addEventListener('click', blowCandles);
-
-// Love Letter Modal Logic
-readLetterBtn.addEventListener('click', () => {
+function openLetter() {
     letterModal.classList.add('open');
     triggerConfettiCannon();
-});
+}
 
-closeLetterBtn.addEventListener('click', () => {
+function closeLetter() {
     letterModal.classList.remove('open');
+}
+
+/* =========================================
+   REPLAY
+========================================= */
+
+async function replaySurprise() {
+
+    if(isRunning) return;
+
+    surpriseArea.classList.remove('show');
+    heartTarget.classList.remove('show','hit');
+
+    arrowSvg.style.opacity = '0';
+
+    bowString.setAttribute(
+        'd',
+        'M40 10 L40 100 L40 190'
+    );
+
+    startBtn.style.display = 'block';
+    startBtn.style.opacity = '1';
+    startBtn.style.transform = 'scale(1)';
+
+    recipientNameInput.style.display = 'block';
+
+    isRunning = false;
+
+    await wait(200);
+
+    recipientNameInput.focus();
+}
+
+/* =========================================
+   EVENT LISTENERS
+========================================= */
+
+startBtn.addEventListener('click',() => {
+
+    if(!applyRecipientName()) return;
+
+    startSurpriseSequence();
+
 });
 
-letterModal.addEventListener('click', (e) => {
-    if (e.target === letterModal) {
-        letterModal.classList.remove('open');
+recipientNameInput.addEventListener('keydown',event => {
+    if(event.key === 'Enter') {
+        startBtn.click();
     }
 });
 
-// Replay Surprise Flow
-replayBtn.addEventListener('click', () => {
-    surpriseArea.classList.remove('show');
-    isRunning = false;
-    setTimeout(() => {
+heartTarget.addEventListener('click',() => {
+    if(!isRunning && recipientName) {
         startSurpriseSequence();
-    }, 400);
+    }
 });
+
+cakeWrapper.addEventListener('click',blowCandles);
+blowCandlesBtn.addEventListener('click',blowCandles);
+
+readLetterBtn.addEventListener('click',openLetter);
+closeLetterBtn.addEventListener('click',closeLetter);
+
+letterModal.addEventListener('click',event => {
+    if(event.target === letterModal) {
+        closeLetter();
+    }
+});
+
+replayBtn.addEventListener('click',replaySurprise);
+
 </script>
+
 </body>
 </html>
